@@ -1,6 +1,6 @@
 ## Synopsis
 
-StackGen is a python package that performs stacked generalization. Check out the seminal paper 'Stacked Generalization' by David Wolpert and the accompanying report in the repo for more information.
+StackGen is a python package that performs stacked generalization. Check out the seminal paper 'Stacked Generalization' by David Wolpert (Ref: Wolpert, David H. "Stacked generalization." Neural networks 5.2 (1992): 241-259) and the accompanying report.pdf in the repo for more information.
 
 ## Motivation
 
