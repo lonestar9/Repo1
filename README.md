@@ -5,7 +5,7 @@ StackGen is a python package that performs stacked generalization. Check out the
 ## Motivation
 
 <p align="justify"> 
-Stacked generalization or 'stacking' has become a staple technique in Kaggle competitions (and other data science competitions as well) among top competitors. This technique is used to  combine multiple machine learning models using a meta-learner and can greatly improve generalization error. However, the implementation of this technique is rather tedious and confusing for beginners and pros alike. The StackGen package aims to hide the complexity behind stacking and provide an easy, familiar api for users to perform stacking. Please refer to report.pdf in this repo for detailed information. 
+Stacked generalization or 'stacking' has become a staple technique in Kaggle competitions (and other data science competitions as well) among top competitors. This technique is used to  combine multiple machine learning models using a meta-learner and can greatly improve generalization error. However, the implementation of stacked generalization is rather tedious and confusing for beginners and pros alike. The StackGen package aims to hide the complexity behind this technique and provide an easy, familiar api for users to perform stacking. Please refer to report.pdf in this repo for more information. 
 </p>
 
 ## Requirements
