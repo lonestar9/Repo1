@@ -11,7 +11,7 @@ unittest (for tests_stackgen.py)
 
 ## Code Example
 
----Regression Example----
+*Regression Example*
 from Stacked_Generalization.stackgen import StackGen
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
@@ -28,7 +28,7 @@ stacked_regressor = StackGen([Ridge(), Lasso(),RandomForestRegressor(random_stat
 final_result = stacked_regressor.fit_predict(X_TR, y_TR, X_TE, y_TE)
 
 
----Classification Example---
+*Classification Example*
 from Stacked_Generalization.stackgen import StackGen
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
