@@ -1,49 +1,63 @@
-#StackGen - A python package that performs stacked generalization
-
-#Requirements
-Python 3
-NumPy
-scikit-learn
-unittest (for the testing module)
-
-
-#Code
-The entire code is in the "Stacked_Generalization" directory
-
-
-#Run
-In a terminal, navigate to the top level of the directory and launch jupyter notebook server to view the notebooks with examples. If you want to use StackGen for your own models, copy the "Stacked_Generalization" folder to your current directory and import StackGen as follows
->>> from Stacked_Generalization.StackGen import StackGen
->>> stacked_regressor = StackGen(..)
-
-
-#Examples
-While running the Jupyter notebooks with classification examples, ensure that the notebook and that dataset "CTG - required cols with NSP.csv" are in the same directory. 
-
-
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+StackGen is a python package that performs stacked generalization. Check out the seminal paper 'Stacked Generalization' by David Wolpert and the accompanying report in the repo for more information.
+
+## Requirements
+Python 3.3+ (support for namespace packages)
+NumPy
+scikit-learn
+unittest (for tests_stackgen.py)
+
 
 ## Code Example
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+---Regression Example----
+from Stacked_Generalization.stackgen import StackGen
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn import datasets
+
+boston = datasets.load_boston()
+X, Y = boston.data, boston.target
+X_TR, X_TE, y_TR, y_TE = train_test_split(X, Y, test_size=0.3, random_state=9)
+    
+stacked_regressor = StackGen([Ridge(), Lasso(),RandomForestRegressor(random_state = 9)], 
+                            stacker = RandomForestRegressor(random_state = 9), classification = False, 
+                            n_folds = 3, kf_random_state = 9, stack_with_orig = False, save_results = 0)
+final_result = stacked_regressor.fit_predict(X_TR, y_TR, X_TE, y_TE)
+
+
+---Classification Example---
+from Stacked_Generalization.stackgen import StackGen
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.naive_bayes import GaussianNB 
+from sklearn.model_selection import train_test_split
+import pandas as pd
+
+data = pd.read_csv("CTG - required cols with NSP.csv")
+X, Y = data.iloc[:, 0:21].as_matrix(), np.array(data.iloc[:, 21:22]).ravel()
+X_TR, X_TE, y_TR, y_TE = train_test_split(X, Y, test_size=0.3, stratify = Y, random_state=9)
+
+stacked_classifier = StackGen(base_models = [KNeighborsClassifier(n_neighbors=10), GaussianNB()], 
+                              stacker = RandomForestClassifier(n_estimators = 300, random_state= 9),
+                              classification = True, n_folds = 5, stratified = True, kf_random_state = 9, 
+                              save_results = 0 , stack_with_orig = True)
+final_result = stacked_classifier.fit_predict(X_TR, y_TR, X_TE, y_TE)
+
 
 ## Motivation
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+Stacked generalization or 'stacking' has become a staple technique in Kaggle competitions(and other data science competitions as well) among top competitors. This technique is used to  combine multiple machine learning models using a meta-learner and can greatly improve generalization error. However, the implementation of this technique is rather tedious and confusing for beginners and pros alike. The StackGen package aims to hide the complexity behind stacking and provide an easy, familiar api for users to perform stacking. Please refer to report.pdf in this repo for detailed information. 
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
-
-## API Reference
-
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+Clone the project to your local machine and import the package in your scripts. Installation via pip will be available soon!
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
+Run tests_stackgen.py to test all methods of StackGen for both classification and Regression cases.
 
 ## License
 
