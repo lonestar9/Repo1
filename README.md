@@ -12,6 +12,7 @@ unittest (for tests_stackgen.py)
 ## Code Example
 
 *Regression Example*
+```python
 from Stacked_Generalization.stackgen import StackGen
 from sklearn.linear_model import Ridge, Lasso
 from sklearn.ensemble import RandomForestRegressor
@@ -26,9 +27,10 @@ stacked_regressor = StackGen([Ridge(), Lasso(),RandomForestRegressor(random_stat
                             stacker = RandomForestRegressor(random_state = 9), classification = False, 
                             n_folds = 3, kf_random_state = 9, stack_with_orig = False, save_results = 0)
 final_result = stacked_regressor.fit_predict(X_TR, y_TR, X_TE, y_TE)
-
+```
 
 *Classification Example*
+```python
 from Stacked_Generalization.stackgen import StackGen
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -45,7 +47,7 @@ stacked_classifier = StackGen(base_models = [KNeighborsClassifier(n_neighbors=10
                               classification = True, n_folds = 5, stratified = True, kf_random_state = 9, 
                               save_results = 0 , stack_with_orig = True)
 final_result = stacked_classifier.fit_predict(X_TR, y_TR, X_TE, y_TE)
-
+```
 
 ## Motivation
 
